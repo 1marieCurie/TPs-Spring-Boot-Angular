@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail du médicament</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h1 th:text="${detailProduit.id == null ? 'Nouveau détail' : 'Modifier détail'}"></h1>
+
+<form th:action="@{/details/save}" th:object="${detailProduit}" method="post">
+
+    <input type="hidden" th:field="*{id}"/>
+
+    <label>Médicament :</label>
+    <select name="medicamentId">
+        <option th:each="m : ${medicaments}" 
+                th:value="${m.id}" 
+                th:text="${m.nom}" 
+                th:selected="${m.id == medicament?.id}">
+        </option>
+    </select><br><br>
+
+    <label>Fabricant :</label>
+    <input type="text" th:field="*{fabricant}"/><br>
+
+    <label>Pays d'origine :</label>
+    <input type="text" th:field="*{paysOrigine}"/><br>
+
+    <label>Composition :</label>
+    <input type="text" th:field="*{composition}"/><br>
+
+    <label>Dosage :</label>
+    <input type="text" th:field="*{dosage}"/><br>
+
+    <label>Indications :</label>
+    <input type="text" th:field="*{indications}"/><br><br>
+
+    <button type="submit">Sauvegarder</button>
+</form>
+
+<p><a href="/medicaments">Retour à la liste des médicaments</a></p>
+
+</body>
+</html>

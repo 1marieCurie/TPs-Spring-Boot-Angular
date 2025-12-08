@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tag</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h1 th:text="${tag.id == null ? 'Nouveau tag' : 'Modifier tag'}"></h1>
+
+<form th:action="${tag.id == null} ? @{/tags/} : @{'/tags/' + ${tag.id}}" method="post">
+    <input type="hidden" name="_method" th:value="${tag.id == null} ? 'POST' : 'PUT'">
+
+    <label>Nom du tag :</label>
+    <input type="text" name="libelle" th:value="${tag.libelle}" required><br><br>
+
+    <button type="submit">Sauvegarder</button>
+</form>
+
+<p><a href="/tags">Retour</a></p>
+</body>
+</html>

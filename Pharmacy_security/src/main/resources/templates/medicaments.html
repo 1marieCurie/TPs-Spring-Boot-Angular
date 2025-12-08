@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<title>Médicaments</title>
+</head>
+
+<body>
+
+<h1>Liste des médicaments</h1>
+
+<p><a href="/home">Accueil</a></p>
+<a href="/medicaments/add" sec:authorize="hasAnyRole('ADMIN','PHARMACIEN')">Ajouter</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Code barre</th>
+            <th>Date expiration</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="m : ${medicaments}">
+            <td th:text="${m.nom}"></td>
+            <td th:text="${m.description}"></td>
+            <td th:text="${m.prix}"></td>
+            <td th:text="${m.codeBarre}"></td>
+            <td th:text="${m.dateExpiration}"></td>
+
+            <td>
+                <!-- Modifier -->
+                <a th:href="@{/medicaments/edit/{id}(id=${m.id})}" 
+                   sec:authorize="hasAnyRole('ADMIN','PHARMACIEN')">Modifier</a>
+
+                <!-- Voir détails -->
+                <a th:href="@{/medicaments/details/{id}(id=${m.id})}">Détails</a>
+
+                <!-- Supprimer -->
+                <form th:action="@{/medicaments/{id}(id=${m.id})}"
+                      method="post" sec:authorize="hasRole('ADMIN')" style="display:inline;">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

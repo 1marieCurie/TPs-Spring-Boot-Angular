@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Catégories</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h1>Liste des catégories</h1>
+
+<p><a href="/home">Accueil</a></p>
+<a href="/categories/add" sec:authorize="hasRole('ADMIN')">Ajouter</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th sec:authorize="hasRole('ADMIN')">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="c : ${categories}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.nom}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/categories/edit/{id}(id=${c.id})}">Modifier</a>
+                <form th:action="@{/categories/{id}(id=${c.id})}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

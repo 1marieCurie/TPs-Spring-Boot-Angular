@@ -1,0 +1,99 @@
+/* ======== Reset basique ========= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ======== Corps ========= */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* ======== Titres ========= */
+h1, h2, h3 {
+    margin-bottom: 15px;
+    color: #222;
+}
+
+/* ======== Liens ========= */
+a {
+    text-decoration: none;
+    color: #1a73e8;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ======== Paragraphes ========= */
+p {
+    margin-bottom: 10px;
+}
+
+/* ======== Tableaux ========= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 6px 10px;
+    margin-bottom: 2px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background-color: #1a73e8;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.2s;
+}
+
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 0.9em;
+    }
+
+    body {
+        padding: 10px;
+    }
+}
+
+/* ======== Formulaires ======== */
+input[type="text"],
+input[type="password"] {
+    width: 300px;  /* 100% du conteneur (ici max 400px) */
+    padding: 10px 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}

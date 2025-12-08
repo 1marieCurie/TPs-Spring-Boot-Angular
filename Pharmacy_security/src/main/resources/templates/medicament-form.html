@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Médicament</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+<h1 th:text="${medicament.id != null} ? 'Modifier médicament' : 'Ajouter médicament'"></h1>
+
+<form th:action="${medicament.id != null} ? @{'/medicaments/' + ${medicament.id}} : @{/medicaments/}" 
+      method="post">
+
+    <input type="hidden" name="_method" 
+           th:value="${medicament.id != null} ? 'PUT' : 'POST'">
+
+    <label>Nom :</label>
+    <input type="text" name="nom" th:value="${medicament.nom}" required><br>
+
+    <label>Description :</label>
+    <textarea name="description" th:text="${medicament.description}"></textarea><br>
+
+    <label>Prix :</label>
+    <input type="number" name="prix" step="0.01" th:value="${medicament.prix}" required><br>
+
+    <label>Code barre :</label>
+    <input type="text" name="codeBarre" th:value="${medicament.codeBarre}"><br>
+
+    <label>Date d'expiration :</label>
+    <input type="date" name="dateExpiration" th:value="${medicament.dateExpiration}"><br>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<a href="/medicaments">Retour</a>
+
+</body>
+</html>

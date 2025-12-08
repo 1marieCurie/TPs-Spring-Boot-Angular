@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du produit</title>
+</head>
+<body>
+
+<h1>Détails du produit : <span th:text="${medicament.nom}"></span></h1>
+
+<!-- Formulaire éditable seulement pour ADMIN ou PHARMACIEN -->
+<form th:action="@{/details/save}" method="post" sec:authorize="hasAnyRole('ADMIN','PHARMACIEN')">
+    <input type="hidden" name="medicamentId" th:value="${medicament.id}"/>
+
+    <label>Fabricant :</label>
+    <input type="text" name="fabricant" th:value="${detailProduit.fabricant}" required/><br>
+
+    <label>Pays d'origine :</label>
+    <input type="text" name="paysOrigine" th:value="${detailProduit.paysOrigine}"/><br>
+
+    <label>Composition :</label>
+    <input type="text" name="composition" th:value="${detailProduit.composition}"/><br>
+
+    <label>Dosage :</label>
+    <input type="text" name="dosage" th:value="${detailProduit.dosage}"/><br>
+
+    <label>Indications :</label>
+    <input type="text" name="indications" th:value="${detailProduit.indications}"/><br>
+
+    <button type="submit">Modifier</button>
+</form>
+
+<!-- Version lecture seule pour tous les utilisateurs -->
+<div sec:authorize="!hasAnyRole('ADMIN','PHARMACIEN')">
+    <p><strong>Fabricant :</strong> <span th:text="${detailProduit.fabricant}">N/A</span></p>
+    <p><strong>Pays d'origine :</strong> <span th:text="${detailProduit.paysOrigine}">N/A</span></p>
+    <p><strong>Composition :</strong> <span th:text="${detailProduit.composition}">N/A</span></p>
+    <p><strong>Dosage :</strong> <span th:text="${detailProduit.dosage}">N/A</span></p>
+    <p><strong>Indications :</strong> <span th:text="${detailProduit.indications}">N/A</span></p>
+</div>
+
+<p><a th:href="@{/medicaments}">Retour à la liste des produits</a></p>
+<p><a th:href="@{/home}">Accueil</a></p>
+
+</body>
+</html>

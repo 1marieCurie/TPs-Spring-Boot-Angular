@@ -1,4 +1,3 @@
 package ma.ensaf.todo.dto;
 
-public class LoginRequest {
-}
+public record LoginRequest(String username, String password) {}

@@ -1,4 +1,4 @@
-package ma.ensaf.todo.config;
+package ma.ensaf.todo.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

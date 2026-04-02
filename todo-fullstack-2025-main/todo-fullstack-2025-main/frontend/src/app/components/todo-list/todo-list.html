@@ -1,0 +1,34 @@
+<!-- Formulaire création/édition Todo -->
+
+<form (ngSubmit)="addTodo()">
+  <input type="text" [(ngModel)]="todo.title" name="title" required placeholder="Titre">
+
+  <textarea [(ngModel)]="todo.description" name="description" placeholder="Description"></textarea>
+
+  <input type="text" [(ngModel)]="searchQuery" (input)="search(searchQuery)" placeholder="Rechercher un todo...">
+
+  <select [(ngModel)]="todo.priority" name="priority">
+    <option value="LOW">Low</option>
+    <option value="MEDIUM">Medium</option>
+    <option value="HIGH">High</option>
+  </select>
+
+  <select [(ngModel)]="todo.category" name="category">
+    <option value="WORK">Work</option>
+    <option value="STUDY">Study</option>
+    <option value="HOME">Home</option>
+    <option value="OTHER">Other</option>
+  </select>
+
+  <input type="date" [(ngModel)]="todo.dueDate" name="dueDate">
+
+  <button type="submit">Save</button>
+</form>
+
+<!-- Filtre global par priorité -->
+<select (change)="filterPriority($event.target.value)">
+  <option value="ALL">Tous</option>
+  <option value="LOW">Low</option>
+  <option value="MEDIUM">Medium</option>
+  <option value="HIGH">High</option>
+</select>

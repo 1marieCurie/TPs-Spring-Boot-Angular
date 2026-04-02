@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Utilisateur</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h1 th:text="${user.id} != null ? 'Modifier utilisateur' : 'Ajouter utilisateur'"></h1>
+<p><a href="/home">Accueil</a></p>
+<form th:action="${user.id} != null ? @{/admin/users/{id}(id=${user.id})} : @{/admin/users/}" 
+      method="post">
+    <input type="hidden" name="_method" th:value="${user.id} != null ? 'PUT' : 'POST'">
+
+    <label>Nom d'utilisateur :</label>
+    <input type="text" name="username" th:value="${user.username}" required><br><br>
+
+    <label>Mot de passe :</label>
+    <input type="password" name="password"><br><br>
+
+    <label>Rôles :</label><br>
+    <div th:each="r : ${roles}">
+        <input type="checkbox" name="roleIds" th:value="${r.id}" 
+               th:checked="${user.roles != null and user.roles.contains(r)}"/> 
+        <span th:text="${r.nom}"></span><br>
+    </div><br>
+
+    <button type="submit">Sauvegarder</button>
+</form>
+
+<p><a href="/admin/users">Retour</a></p>
+
+</body>
+</html>

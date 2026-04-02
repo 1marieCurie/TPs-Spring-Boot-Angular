@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Accueil</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+<h1>Bienvenue</h1>
+
+<p th:text="'Utilisateur : ' + ${username}"></p>
+<p>Rôles :</p>
+<ul>
+    <li th:each="r : ${roles}" th:text="${r.authority}"></li>
+</ul>
+
+<!-- Actions selon rôle -->
+<div>
+    <a href="/medicaments">Médicaments</a>
+    <a href="/categories" sec:authorize="hasAnyRole('ADMIN','PHARMACIEN')">Catégories</a>
+	<a href="/fournisseurs" sec:authorize="hasAnyRole('ADMIN','PHARMACIEN')">Fournisseurs</a>
+    <a href="/admin/users" sec:authorize="hasRole('ADMIN')">Gestion utilisateurs</a>
+</div>
+
+<br>
+<a href="/logout">Se déconnecter</a>
+
+</body>
+</html>

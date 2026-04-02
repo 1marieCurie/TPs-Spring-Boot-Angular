@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Fournisseurs</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Liste des fournisseurs</h1>
+
+<p><a href="/home">Accueil</a></p>
+<p sec:authorize="hasRole('ADMIN')">
+    <a href="/fournisseurs/add">+ Ajouter un fournisseur</a>
+</p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th sec:authorize="hasRole('ADMIN')">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="f : ${fournisseurs}">
+        <td th:text="${f.id}"></td>
+        <td th:text="${f.nom}"></td>
+        <td th:text="${f.description}"></td>
+        <td sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/fournisseurs/edit/{id}(id=${f.id})}">Modifier</a>
+            <form th:action="@{/fournisseurs/{id}(id=${f.id})}" method="post" style="display:inline;">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
